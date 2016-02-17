@@ -8,8 +8,12 @@ function [H2to1] = computeH(p1,p2)
     empty = zeros(N,3);
     A = [-x2 -y2 -ones(N,1) -empty x1.*x2 x1.*y2 x1;
         -empty -x2 -y2 -ones(N,1) y1.*x2 y1.*y2 y1];
-    [H,~,~] = svd(A'*A);
+    % [H,~,~] = svd(A'*A);
+    [V,D] = eig(A'*A);
+    [~,index] = min(sum(D));
+    H = V(:,index);
+    H = vec2mat(H,3);
     % H2to1 = reshape(H(:,9),3,3)';
-    H2to1 = vec2mat(H(:,9),3);
+    % H2to1 = vec2mat(H(:,9),3);
 
 end
