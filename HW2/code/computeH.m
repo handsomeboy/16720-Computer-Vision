@@ -1,4 +1,5 @@
 % reference: https://www.cs.ubc.ca/grads/resources/thesis/May09/Dubrofsky_Elan.pdf
+% http://www.cse.psu.edu/~rtc12/CSE486/lecture16.pdf
 function [H2to1] = computeH(p1,p2)
     N = size(p1,2);
     x1 = p1(1,:)';
@@ -12,8 +13,5 @@ function [H2to1] = computeH(p1,p2)
     [V,D] = eig(A'*A);
     [~,index] = min(sum(D));
     H = V(:,index);
-    H = vec2mat(H,3);
-    % H2to1 = reshape(H(:,9),3,3)';
-    % H2to1 = vec2mat(H(:,9),3);
-
+    H2to1 = vec2mat(H,3);
 end

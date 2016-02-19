@@ -1,4 +1,5 @@
-function [locs, desc] = briefLite(im,compareX, compareY)
+function [locs, desc] = briefLite(im)
+    load('testPattern.mat');
     sigma0 = 1;
     k = sqrt(2);
     levels = [-1 0 1 2 3 4];

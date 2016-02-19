@@ -7,7 +7,6 @@ function [locsDoG] = getLocalExtrema(DoGPyramid, DoGLevels, PrincipalCurvature, 
     for k = 2:l+1
         for y = 2:r+1
             for x = 2:c+1
-                % max_scale = DoGPyramid(y,x,k-1:k+1);
                 max_space = DoGPyramid(y-1:y+1,x-1:x+1,k-1:k+1);
                 % maybe minimum value also works
                 if(DoGPyramid(y,x,k) == max(max_space(:)) || DoGPyramid(y,x,k) == min(max_space(:)))
