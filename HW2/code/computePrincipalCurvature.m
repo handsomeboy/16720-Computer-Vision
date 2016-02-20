@@ -3,10 +3,13 @@ function [PrincipalCurvature] = computePrincipalCurvature(DoGPyramid)
     r = size(DoGPyramid,1);
     c = size(DoGPyramid,2);
     for i = 1:n
+        % using vectorize computation.
+        % inspired by reference[3]. no need to compute eigenvalue
         [dx,dy] = gradient(DoGPyramid(:,:,i));
         [dxx,dxy] = gradient(dx);
         [dyx,dyy] = gradient(dy);
         R = (dxx+dyy).^2 ./ (dxx.*dyy - dxy.*dyx);
+        
         % for j = 1:r*c
         %     h = [dxx(j) dxy(j);dyx(j) dyy(j)];
         %     e = eig(h);

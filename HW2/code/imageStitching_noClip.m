@@ -1,6 +1,7 @@
 function [panaImge] = imageStitching_noClip(img1, img2, H2to1)
     fixed_width = 1280;
     [height, width] = size(img2(:,:,1));
+    % set corner_points to compute ratio and fixed_height
     corner_points = zeros(4,3);
     corner_points(1,:) = [1,1,1];
     corner_points(2,:) = [width,1,1];
@@ -8,6 +9,7 @@ function [panaImge] = imageStitching_noClip(img1, img2, H2to1)
     corner_points(4,:) = [width, height,1];
     corner_points = corner_points';
 
+    % compute coordinate for warped image
     correspon_points = H2to1*corner_points;
     correspon_points = correspon_points ./ repmat(correspon_points(3,:),3,1);
     correspon_points = correspon_points(1:2,:);
@@ -25,6 +27,7 @@ function [panaImge] = imageStitching_noClip(img1, img2, H2to1)
     M(3,2) = abs(max_height);
 
     M = M';
+    % get largest height, so every pixel is visible.
     fixed_height = abs(max_height) + max(correspon_points(2,3), correspon_points(2,4));
 
     outsize = [round(fixed_height), fixed_width];
@@ -32,6 +35,7 @@ function [panaImge] = imageStitching_noClip(img1, img2, H2to1)
     im1_warp = warpH(img1, M, outsize);
     im2_warp = warpH(img2, M*H2to1, outsize);
 
+    % set up two mask for two images
     mask1 = zeros(size(img1,1), size(img1,2));
     mask1(1,:) = 1;
     mask1(end,:) = 1;
@@ -50,6 +54,7 @@ function [panaImge] = imageStitching_noClip(img1, img2, H2to1)
     mask2 = mask2/max(mask2(:));
     mask_warp2 = warpH(mask2, M*H2to1, outsize);
     
+
     mask_to1 = mask_warp1./(mask_warp1+mask_warp2);
     mask_to2 = mask_warp2./(mask_warp1+mask_warp2);
     mask_to1(isnan(mask_to1)) = 0;

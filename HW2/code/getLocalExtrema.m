@@ -1,6 +1,7 @@
 function [locsDoG] = getLocalExtrema(DoGPyramid, DoGLevels, PrincipalCurvature, th_contrast, th_r)
     locsDoG = [];
     [r,c,l] = size(DoGPyramid);
+    % concatenate the DoGPyramid on every aspect by an extra layer outside the matrix so that every points in DoGPyramid has 26 neighbors, which makes for loops easy.
     DoGPyramid = [DoGPyramid(1,:,:); DoGPyramid; DoGPyramid(r,:,:)];
     DoGPyramid = [DoGPyramid(:,1,:) DoGPyramid DoGPyramid(:,c,:)];
     DoGPyramid = cat(3,DoGPyramid(:,:,1), DoGPyramid, DoGPyramid(:,:,l));

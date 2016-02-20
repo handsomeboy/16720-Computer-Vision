@@ -1,4 +1,5 @@
 function [panoImg] = imageStitching(im1, im2, H2to1)
+    % just put image together
     outSize = [size(im1, 1), 1700];
     warp2 = warpH(im2, H2to1, outSize);
     panoImg = warp2;
