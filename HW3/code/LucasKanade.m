@@ -6,7 +6,7 @@ function [u,v] = LucasKanade(It, It1, rect)
     H = [dx_vector dy_vector]' * [dx_vector dy_vector];
 
     delta = 1;
-    threshold = 0.1;
+    threshold = 0.01;
     p = [0,0];
 %reference: http://www.cs.cmu.edu/~16385/lectures/Lecture23.pdf
     while (delta > threshold)

@@ -8,7 +8,7 @@ function [u, v] = LucasKanadeBasis(It, It1, rect, basis)
     coefficient1 = H \ [dx_vector,dy_vector]';
 
     delta = 1;
-    threshold = 0.1;
+    threshold = 0.01;
 
     [height,width,level] = size(basis);
     basis_vector = reshape(basis,height*width,level);
