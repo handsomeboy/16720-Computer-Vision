@@ -23,8 +23,10 @@ function mask = SubtractDominantMotion(image1, image2)
     deltaI(deltaI < 20) = 0;
     [row,col] = find(deltaI > 20);
     BW = bwselect(deltaI,col,row,4);
-    BW = bwareaopen(BW,20);
-    SE = strel('disk',4,4);
+    BW = bwareaopen(BW,10);
+    SE = strel('disk',6,4);
     BW = imdilate(BW,SE);
+    SE = strel('disk',4,4);
+    BW = imerode(BW,SE);
     mask = BW;
 end

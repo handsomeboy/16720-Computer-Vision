@@ -8,17 +8,17 @@ function M = LucasKanadeAffine(It, It1)
     It1 = double(It1);
     dx_vector = dx(:);
     dy_vector = dy(:);
-    H = [dx_vector dy_vector]' * [dx_vector dy_vector];
-
+    x = 1:width;
+    y = 1:height;
+    [X,Y] = meshgrid(x,y);
+    X = X(:);
+    Y = Y(:);
+    count = 1;
     delta = 1;
-    threshold = 0.2;
+    threshold = 0.01;
 
     while (delta > threshold)
-        x = 1:width;
-        y = 1:height;
-        [X,Y] = meshgrid(x,y);
-        X = X(:);
-        Y = Y(:);
+        count = count + 1;
         ori = [X,Y,ones(size(X,1),1)];
         ori = ori';
         warp = M * ori;
@@ -28,12 +28,16 @@ function M = LucasKanadeAffine(It, It1)
         warp_img(isnan(warp_img)) = 0;
         error_img = It - warp_img;
         error_vector = error_img(:);
-        Q1 = [X,X,Y,Y,ones(size(X,1),1),ones(size(X,1),1)];
-        Q2 = [dx_vector,dy_vector,dx_vector,dy_vector,dx_vector,dy_vector];
-        Q = Q1.*Q2;
+%         Q1 = [X,X,Y,Y,ones(size(X,1),1),ones(size(X,1),1)];
+%         Q2 = [dx_vector,dy_vector,dx_vector,dy_vector,dx_vector,dy_vector];
+%         Q = Q1.*Q2;
+        Q = [X.*dx_vector, X.*dy_vector,Y.*dx_vector,Y.*dy_vector,dx_vector,dy_vector];
         H = Q'*Q;
         delta_p = H\Q' * error_vector;
         delta = norm(delta_p);
         M = M + [reshape(delta_p,2,3);zeros(1,3)];
+        if (count == 50)
+            break;
+        end
     end
 end
