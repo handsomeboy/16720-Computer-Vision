@@ -1,13 +1,12 @@
 load(fullfile('..','data','sylvseq.mat'));
 load(fullfile('..','data','sylvbases.mat'));
-
+[height, width, frame_num] = size(frames);
+% frames = frames(:,:,1:3:end);
 rects = [102,62,156,108];
 rects1 = rects;
 rects2 = rects;
 corner_points1 = zeros(2,4);
 corner_points2 = zeros(2,4);
-[height, width, frame_num] = size(frames);
-
 for i = 1:frame_num - 1
     corner_points1(:,1) = [rects1(1);rects1(2)];
     corner_points1(:,2) = [rects1(1);rects1(4)];
