@@ -5,7 +5,7 @@ rects{1} = diag([1,1,1]);
 for i = 1:level - 1
     img = double(frames(:,:,i));
     img_next = double(frames(:,:,i+1));
-    [mask,M] = SubtractDominantMotion(img, img_next);
+    mask = SubtractDominantMotion(img, img_next);
     rects{i+1} = M;
     img_final = imfuse(img,mask,'blend');
     imshow(uint8(img_final));

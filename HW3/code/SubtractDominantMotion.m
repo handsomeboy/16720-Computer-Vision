@@ -1,4 +1,4 @@
-function [mask, M] = SubtractDominantMotion(image1, image2)
+function mask = SubtractDominantMotion(image1, image2)
     double_img1 = double(image1);
     double_img2 = double(image2);
     M = LucasKanadeAffine(image1, image2);
