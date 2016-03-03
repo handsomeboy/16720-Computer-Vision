@@ -1,4 +1,4 @@
-function mask = SubtractDominantMotion(image1, image2)
+function [mask, M] = SubtractDominantMotion(image1, image2)
     double_img1 = double(image1);
     double_img2 = double(image2);
     M = LucasKanadeAffine(image1, image2);
@@ -24,7 +24,7 @@ function mask = SubtractDominantMotion(image1, image2)
     [row,col] = find(deltaI > 20);
     BW = bwselect(deltaI,col,row,4);
     BW = bwareaopen(BW,10);
-    SE = strel('disk',6,4);
+    SE = strel('disk',8,4);
     BW = imdilate(BW,SE);
     SE = strel('disk',4,4);
     BW = imerode(BW,SE);
