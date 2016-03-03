@@ -6,17 +6,13 @@ function [u, v] = LucasKanadeBasis(It, It1, rect, basis)
     dy_vector = dy(:);
     H = [dx_vector dy_vector]' * [dx_vector dy_vector];
     coefficient1 = H \ [dx_vector,dy_vector]';
-
     delta = 1;
     threshold = 0.01;
-
     [height,width,level] = size(basis);
     basis_vector = reshape(basis,height*width,level);
     coefficient2 = basis_vector';
-
     coefficient = [coefficient2;coefficient1];
     p = zeros(level+2,1);
-
     while (delta > threshold) 
         X = rect(1) + p(level+1):rect(3) + p(level+1);
         Y = rect(2) + p(level+2):rect(4) + p(level+2);
@@ -33,4 +29,3 @@ function [u, v] = LucasKanadeBasis(It, It1, rect, basis)
     u = p(level+1);
     v = p(level+2);
 end
-

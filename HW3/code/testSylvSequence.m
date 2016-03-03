@@ -1,8 +1,11 @@
-load(fullfile('..','data','sylvseq.mat'));
-load(fullfile('..','data','sylvbases.mat'));
+% load(fullfile('..','data','sylvseq.mat'));
+% load(fullfile('..','data','sylvbases.mat'));
+load(fullfile('..','data','bookBases.mat'));
+load(fullfile('..','data','bookSequence.mat'));
 [height, width, frame_num] = size(frames);
 % frames = frames(:,:,1:3:end);
-rects = [102,62,156,108];
+% rects = [102,62,156,108];
+rects = rect;
 rects1 = rects;
 rects2 = rects;
 corner_points1 = zeros(2,4);
