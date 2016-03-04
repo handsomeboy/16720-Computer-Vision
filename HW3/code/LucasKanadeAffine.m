@@ -3,6 +3,7 @@ function M = LucasKanadeAffine(It, It1)
     It1 = double(It1);
     It = double(It);
     p = zeros(3,3);
+    % initiate M
     M = p + diag([1,1,1]);
     [dx,dy] = gradient(It);
     It1 = double(It1);
@@ -27,12 +28,15 @@ function M = LucasKanadeAffine(It, It1)
         warp = M * ori;
         warp_x = reshape(warp(1,:)',height,width);
         warp_y = reshape(warp(2,:)',height,width);
+        % warp the next image
         warp_img = interp2(It1,warp_x,warp_y,'nearset');
+        % set all NaN to 0 to avoid error
         warp_img(isnan(warp_img)) = 0;
         error_img = It - warp_img;
         error_vector = error_img(:);
         delta_p = para * error_vector;
         delta = norm(delta_p);
+        % update M
         M = M + [reshape(delta_p,2,3);zeros(1,3)];
         if (count == 50)
             break;

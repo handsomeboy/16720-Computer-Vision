@@ -24,10 +24,12 @@ for i = 1:frame_num - 1
     img = double(frames(:,:,i));
     imshow(frames(:,:,i));
     hold on;
+    % draw the first rectangular
     line(corner_points1(1,1:2),corner_points1(2,1:2), 'Color','yellow','LineWidth',1);
     line(corner_points1(1,2:3),corner_points1(2,2:3), 'Color','yellow','LineWidth',1);
     line(corner_points1(1,3:4),corner_points1(2,3:4), 'Color','yellow','LineWidth',1);
     line([corner_points1(1,4);corner_points1(1,1)],[corner_points1(2,4);corner_points1(2,1)], 'Color','yellow','LineWidth',1);
+    % draw the second rectangular
     line(corner_points2(1,1:2),corner_points2(2,1:2), 'Color','green','LineWidth',1);
     line(corner_points2(1,2:3),corner_points2(2,2:3), 'Color','green','LineWidth',1);
     line(corner_points2(1,3:4),corner_points2(2,3:4), 'Color','green','LineWidth',1);

@@ -8,6 +8,7 @@ rects = zeros(frame_num,4);
 rects(1,:) = rect;
 
 for i = 1:frame_num - 1
+    % using rect to generate corner_points.
     corner_points(:,1) = [rect(1);rect(2)];
     corner_points(:,2) = [rect(1);rect(4)];
     corner_points(:,3) = [rect(3);rect(4)];
@@ -15,6 +16,7 @@ for i = 1:frame_num - 1
     img = double(frames(:,:,i));
     imshow(frames(:,:,i));
     hold on;
+    % draw a rectangular.
     line(corner_points(1,1:2),corner_points(2,1:2), 'Color','g','LineWidth',1);
     line(corner_points(1,2:3),corner_points(2,2:3), 'Color','g','LineWidth',1);
     line(corner_points(1,3:4),corner_points(2,3:4), 'Color','g','LineWidth',1);
