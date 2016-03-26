@@ -8,7 +8,6 @@ function [ E ] = essentialMatrix( F, K1, K2 )
 %       Compute the essential matrix 
 %
 %       Write the computed essential matrix in your writeup
-
-
+E = K2'*F*K1;
 end
 
