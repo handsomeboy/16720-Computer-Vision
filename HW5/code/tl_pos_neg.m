@@ -5,5 +5,8 @@ function template = tl_pos_neg(template_images_pos, template_images_neg)
 % output:
 %     template - [16 x 16 x 9] matrix 
 
+    template_pos = tl_pos(template_images_pos);
+    template_neg = tl_pos(template_images_neg);
+    template = template_pos - template_neg;
 
 end
